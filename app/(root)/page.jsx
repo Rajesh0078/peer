@@ -14,9 +14,10 @@ const ScreenShare = () => {
   useEffect(() => {
     // Initialize PeerJS with the Express server
     const peer = new Peer(undefined, {
-      host: '192.168.1.36', // Replace with your server address
-      port: '5000',
-      path: '/peerjs',
+      host: 'peer-server-s7xw.onrender.com',  // Replace with your Render domain
+      port: 443,                      // Use port 443 for HTTPS
+      path: '/peerjs',                // Ensure this matches the path on the server
+      secure: true,
     });
 
     peer.on('open', (id) => {
