@@ -75,10 +75,15 @@ export default function Home() {
 
     const joinRoom = () => {
         if (roomId && peerInstance && role === "student") {
-            // Student joins the room using the provided room ID (teacher's peer ID)
-            const call = peerInstance.call(roomId); // Call the teacher's room
-            call.on("stream", (remoteStream) => {
-                otherVideoRef.current.srcObject = remoteStream; // Show the teacher's stream
+            var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+            getUserMedia({ video: true, audio: true }, function (stream) {
+                var call = peerInstance.call(roomId, stream);
+                call.on('stream', function (remoteStream) {
+                    // Show stream in some video/canvas element.
+                    otherVideoRef.current.srcObject = remoteStream
+                });
+            }, function (err) {
+                console.log('Failed to get local stream', err);
             });
             setIsConnected(true);
         }
