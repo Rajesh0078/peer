@@ -55,25 +55,30 @@ const ScreenShare = () => {
   };
 
   return (
-    <div>
-      <h2>Your Peer ID: {peerId}</h2>
-      <input
-        type="text"
-        value={remotePeerIdValue}
-        onChange={(e) => setRemotePeerIdValue(e.target.value)}
-        placeholder="Enter remote peer ID"
-      />
-      <button onClick={() => callPeer(remotePeerIdValue)}>Call Peer</button>
-
-      <div>
-        <h3>Local Screen Share</h3>
-        <video ref={localVideoRef} autoPlay playsInline muted style={{ width: '400px' }} />
+    <div className='text-center p-5'>
+      <div className='flex flex-col justify-start items-center gap-3 h-20 '>
+        <h2>Your Peer ID: {peerId}</h2>
+        <div className='flex justify-start items-center '>
+          <input
+            type="text"
+            value={remotePeerIdValue}
+            onChange={(e) => setRemotePeerIdValue(e.target.value)}
+            placeholder="Enter remote peer ID"
+            className='outline-none border rounded-l-md h-10 p-4'
+          />
+          <button onClick={() => callPeer(remotePeerIdValue)} className='bg-blue-400 h-10 px-4 rounded-r-md'>Call Peer</button>
+        </div>
       </div>
 
-      <div>
+      <div className='mt-5'>
         <h3>Remote Screen Share</h3>
-        <video ref={remoteVideoRef} autoPlay playsInline style={{ width: '400px' }} />
+        <video ref={remoteVideoRef} autoPlay playsInline className='border h-[57vh] w-full mt-3 rounded-md' />
       </div>
+      <div >
+        <br />
+        <video ref={localVideoRef} autoPlay playsInline muted className='border rounded-md h-[200px] w-[400px]' />
+      </div>
+
     </div>
   );
 };
