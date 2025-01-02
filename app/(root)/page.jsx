@@ -26,7 +26,7 @@ const ScreenShare = () => {
     });
 
     peer.on('call', (call) => {
-      navigator.mediaDevices.getDisplayMedia({ video: true, audio: true }).then((stream) => {
+      navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((stream) => {
         localVideoRef.current.srcObject = stream;
         call.answer(stream); // Answer the call with the local screen stream
 
@@ -44,7 +44,8 @@ const ScreenShare = () => {
   }, []);
 
   const callPeer = (remotePeerId) => {
-    navigator.mediaDevices.getDisplayMedia({ video: true, audio: true }).then((stream) => {
+    // navigator.mediaDevices.getUserMedia()
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((stream) => {
       localVideoRef.current.srcObject = stream;
       const call = peerInstance.current.call(remotePeerId, stream);
 
@@ -66,7 +67,7 @@ const ScreenShare = () => {
             placeholder="Enter remote peer ID"
             className='outline-none border rounded-l-md h-10 p-4'
           />
-          <button onClick={() => callPeer(remotePeerIdValue)} className='bg-blue-400 h-10 px-4 rounded-r-md'>Call Peer</button>
+          <button onClick={() => callPeer(remotePeerIdValue)} className='bg-blue-400 h-10 px-4 rounded-r-md text-white'>Call Peer</button>
         </div>
       </div>
 
